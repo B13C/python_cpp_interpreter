@@ -16,12 +16,12 @@ int main()
 	// Load the module
 	PyObject* module_name = PyUnicode_FromString("example");
 	PyObject* module = PyImport_Import(module_name);
-	Py_DECREF(module_name);
+	Py_XDECREF(module_name);
 
 	// Get the class definition
 	PyObject* class_name = PyUnicode_FromString("ExampleClass");
 	PyObject* cls = PyObject_GetAttr(module, class_name);
-	Py_DECREF(class_name);
+	Py_XDECREF(class_name);
 
 	// Create an instance of the class
 	PyObject* instance = PyObject_CallObject(cls, NULL);
@@ -30,9 +30,9 @@ int main()
 	PyObject_CallMethod(instance, "example_method", NULL);
 
 	// Clean up
-	Py_DECREF(instance);
-	Py_DECREF(cls);
-	Py_DECREF(module);
+	Py_XDECREF(instance);
+	Py_XDECREF(cls);
+	Py_XDECREF(module);
 	Py_Finalize();
 	std::cout << "Hello World!\n";
 }
