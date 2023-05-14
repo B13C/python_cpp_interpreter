@@ -12,6 +12,9 @@ int main()
 	PyObject* PyFileObject = Py_BuildValue("s", "example.py");
 	FILE* file = _Py_fopen_obj(PyFileObject, "r+");
 	PyRun_SimpleFile(file, "example.py");
+	if (file) {
+		fclose(file);
+	}
 
 	// Load the module
 	PyObject* module_name = PyUnicode_FromString("example");
